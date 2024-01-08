@@ -1,2 +1,3 @@
-# ng-sorter
+# NgSorter
+
 An Angular CDK overlay to sort anything.

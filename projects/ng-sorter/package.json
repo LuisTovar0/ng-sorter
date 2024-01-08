@@ -1,0 +1,20 @@
+{
+  "name": "ng-sorter",
+  "version": "0.1.0",
+  "peerDependencies": {
+    "@angular/material": "^17.0.4",
+    "@types/lodash-es": "^4.17.12",
+    "lodash-es": "^4.17.21",
+    "@angular/common": ">=16",
+    "@angular/core": ">=16"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "readme": "https://github.com/LuisTovar0/ng-sorter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisTovar0/ng-sorter.git"
+  }
+}
