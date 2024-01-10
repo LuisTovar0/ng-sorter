@@ -1,6 +1,6 @@
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
 import {PortalModule} from "@angular/cdk/portal";
-import {CommonModule} from "@angular/common";
+import {NgFor} from "@angular/common";
 import {NgModule} from "@angular/core";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatIconModule} from "@angular/material/icon";
@@ -10,12 +10,12 @@ import {SorterTriggerDirective} from "./sorter-trigger.directive";
 @NgModule({
   declarations: [ NgxSorterOverlayComponent, SorterTriggerDirective ],
   imports: [
-    CommonModule,
+    NgFor,
     PortalModule,
     CdkDrag,
     CdkDropList,
     MatIconModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   exports: [ NgxSorterOverlayComponent, SorterTriggerDirective ],
 })

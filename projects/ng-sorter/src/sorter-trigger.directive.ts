@@ -1,9 +1,7 @@
 import {Directive, ElementRef, inject, Input, OnInit} from '@angular/core';
 import {NgxSorterOverlayComponent} from "./sorter-overlay.component";
 
-@Directive({
-  selector: '[ngxSorterTriggerFor]',
-})
+@Directive({ selector: '[ngxSorterTriggerFor]' })
 export class SorterTriggerDirective implements OnInit {
 
   #elementRef = inject(ElementRef<HTMLElement>);

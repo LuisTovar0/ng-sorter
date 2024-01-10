@@ -1,12 +1,10 @@
 {
   "name": "ng-sorter",
-  "version": "0.0.1-testing.4",
+  "version": "2.0.0-testing.0",
   "peerDependencies": {
-    "@angular/material": "^17.0.4",
+    "@angular/material": ">=16",
     "@types/lodash-es": "^4.17.12",
-    "lodash-es": "^4.17.21",
-    "@angular/common": ">=16",
-    "@angular/core": ">=16"
+    "lodash-es": "^4.17.21"
   },
   "dependencies": {
     "tslib": "^2.3.0"

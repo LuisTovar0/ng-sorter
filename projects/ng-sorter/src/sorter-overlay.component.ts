@@ -15,8 +15,8 @@ export interface Sortable {
 
 @Component({
   selector: 'ngx-sorter',
-  templateUrl:'sorter-overlay.component.html',
-  styleUrl: 'sorter-overlay.component.scss',
+  templateUrl: 'sorter-overlay.component.html',
+  styleUrls: [ 'sorter-overlay.component.scss' ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NgxSorterOverlayComponent implements OnDestroy {
@@ -32,7 +32,7 @@ export class NgxSorterOverlayComponent implements OnDestroy {
   overlayIsOpen = signal(false);
 
   // Will update the <code>sortables</code> list's order.
-  onDrag( currentIndex: number, previousIndex: number ) {
+  onDrag(currentIndex: number, previousIndex: number) {
     this.sortables.update(s => {
       if (!s) return s;
       const copy = cloneDeep(s);
@@ -58,13 +58,13 @@ export class NgxSorterOverlayComponent implements OnDestroy {
       throw new Error("There's not an expertSorterTriggerFor directive pointing to this overlay. Please read how this component should be used at http://wiki.milenio3.local/index.php/@expert/sort-columns");
 
     const positionStrategy = this.#overlay
-        .position()
-        .flexibleConnectedTo(this.origin)
-        .withPush(true)
-        .withPositions([
-          { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' },
-          { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
-        ]);
+      .position()
+      .flexibleConnectedTo(this.origin)
+      .withPush(true)
+      .withPositions([
+        { originX: 'start', originY: 'top', overlayX: 'end', overlayY: 'top' },
+        { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
+      ]);
 
     const scrollStrategy = this.#overlay.scrollStrategies.reposition();
     const overlayConfig = new OverlayConfig({
@@ -77,7 +77,7 @@ export class NgxSorterOverlayComponent implements OnDestroy {
     this.#overlayRef = this.#overlay.create(overlayConfig);
     this.#overlayRef.attach(this.contentTemplate);
     this.#subscriptions.push(
-        this.#overlayRef.backdropClick().subscribe(() => this.hide()),
+      this.#overlayRef.backdropClick().subscribe(() => this.hide()),
     );
     this.overlayIsOpen.set(true);
   }
