@@ -1,24 +1,25 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, ViewChild, WritableSignal, inject, signal } from "@angular/core";
-import {FlexibleConnectedPositionStrategyOrigin, Overlay,OverlayConfig,OverlayRef}from "@angular/cdk/overlay";
-import { CdkPortal } from "@angular/cdk/portal";
-import { Subscription } from "rxjs";
-import {cloneDeep}from "lodash-es";
-import { moveItemInArray } from "@angular/cdk/drag-drop";
+import {moveItemInArray} from "@angular/cdk/drag-drop";
+import {FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayConfig, OverlayRef} from "@angular/cdk/overlay";
+import {CdkPortal} from "@angular/cdk/portal";
+import {
+  ChangeDetectionStrategy, Component, inject, Input, OnDestroy, signal, ViewChild, WritableSignal,
+} from "@angular/core";
+import {cloneDeep} from "lodash-es";
+import {Subscription} from "rxjs";
 
 export interface Sortable {
   key: string;
-  // Translatable strings are allowed.
   displayName?: string;
   active: boolean;
 }
 
 @Component({
-  selector:'sorter-overlay',
+  selector: 'ngx-sorter',
   templateUrl:'sorter-overlay.component.html',
   styleUrl: 'sorter-overlay.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SorterOverlayComponent implements OnDestroy {
+export class NgxSorterOverlayComponent implements OnDestroy {
 
   #overlay = inject(Overlay);
 

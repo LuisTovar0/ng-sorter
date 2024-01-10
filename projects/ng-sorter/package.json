@@ -1,6 +1,6 @@
 {
   "name": "ng-sorter",
-  "version": "0.1.0",
+  "version": "0.0.1-testing.4",
   "peerDependencies": {
     "@angular/material": "^17.0.4",
     "@types/lodash-es": "^4.17.12",

@@ -1,0 +1,14 @@
+.container {
+  padding: .5rem 2rem;
+}
+
+.title-n-buttons {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  & > * {
+    margin: 0;
+  }
+}
