@@ -3,7 +3,7 @@ import {Component, computed, signal} from '@angular/core';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatTableModule} from "@angular/material/table";
-import {NgxSorterModule, Sortable} from "ng-sorter";
+import {NgxSorterModule, Sortable} from "ngx-sorter";
 
 export interface PeriodicElement {
   name: string;

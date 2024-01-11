@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/ng-sorter",
+  "dest": "../../dist/ngx-sorter",
   "lib": {
     "entryFile": "./public-api.ts"
   }

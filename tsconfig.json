@@ -11,8 +11,8 @@
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "paths": {
-      "ng-sorter": [
-        "./dist/ng-sorter"
+      "ngx-sorter": [
+        "./dist/ngx-sorter"
       ]
     },
     "esModuleInterop": true,

@@ -1,5 +1,5 @@
 {
-  "name": "ng-sorter",
+  "name": "ngx-sorter",
   "version": "2.0.0-testing.0",
   "peerDependencies": {
     "@angular/material": ">=16",
@@ -10,9 +10,9 @@
     "tslib": "^2.3.0"
   },
   "sideEffects": false,
-  "readme": "https://github.com/LuisTovar0/ng-sorter",
+  "readme": "https://github.com/LuisTovar0/ngx-sorter",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LuisTovar0/ng-sorter.git"
+    "url": "git+https://github.com/LuisTovar0/ngx-sorter.git"
   }
 }
