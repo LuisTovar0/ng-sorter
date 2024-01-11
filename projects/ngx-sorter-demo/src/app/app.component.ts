@@ -34,18 +34,13 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AppComponent {
 
-  sortableColumns = signal<Sortable[]>([
+  sortableColumns :Sortable[]= [
     { key: 'position', active: true, displayName: 'Position' },
     { key: 'name', active: true, displayName: 'Name' },
     { key: 'weight', active: true, displayName: 'Weight' },
     { key: 'symbol', active: true, displayName: 'Symbol' },
-  ]);
-  displayedColumns = computed(() =>
-    this.sortableColumns().filter(s => s.active).map(s => s.key));
+  ];
 
-  sortableRows = signal<Sortable[]>(ELEMENT_DATA.map(elem => ({ key: elem.name, active: true })));
-  dataSource = computed(() =>
-    this.sortableRows().filter(s => s.active).map(s =>
-      ELEMENT_DATA.find(e => e.name === s.key)));
+  dataSource :Sortable[]= ELEMENT_DATA.map(elem => ({ ...elem, key: elem.name, active: true }));
 
 }

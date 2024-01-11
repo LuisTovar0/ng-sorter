@@ -12,25 +12,20 @@ An Angular CDK overlay to sort anything.
 | 2          | 16+ (uses signals)          |
 | 1          | 14+ (Ivy)                   |
 
-## Versions 2 and 3 usage
-
-[V2 demo](https://stackblitz.com/edit/ngx-sorter-v2-demo) and [V3 demo](https://stackblitz.com/edit/ngx-sorter-v3-demo) (they're the same, just using different versions of Angular and `ngx-sorter`).
-
-It works very similarly to the [Angular Material Menu](https://material.angular.io/components/menu).
+## Version 1 usage
 
 Make sure to install Angular Material before installing `ngx-sorter`.
 
-**In the TypeScript**, declare a signal of the type `Array<Sortable>`.
+**In the TypeScript**, declare a list of `Sortable`.
 
 ```typescript
-import {signal} from "@angular/core";
 import {Sortable} from "ngx-sorter";
 
 @Component({/*...*/})
 export class MyComponent {
-  sortablesSig = signal<Sortable[]>([
+  sortables: Sortable[] = [
     //...
-  ]);
+  ];
 }
 ```
 
@@ -38,8 +33,9 @@ export class MyComponent {
 
 ```html
 <button [ngxSorterTriggerFor]="sorter">Sort</button>
-<ngx-sorter #sorter [sortables]="sortablesSig"/>
+<ngx-sorter #sorter [sortables]="sortables"/>
 ```
+
 
 ### Specifications
 
@@ -57,8 +53,9 @@ interface Sortable {
 
 | Declaration | Description |
 |:-|:-|
-| `overlayIsOpen: Signal<boolean>` | A signal, the boolean value of which is synced with whether the overlay is visible or not.
-| `checkboxChange(checked: boolean, keyToUpdate: string): void` | Will update the `active` value of the `keyToUpdate`'s Sortable — from the `sortables` signal — into the provided value. It is called when a checkbox's value changes. |
-| `onDrag(currentIndex: number, previousIndex: number)` | Will update the `sortables` list's order. It is called when the list order is changed in the overlay. |
+| `overlayIsOpen: boolean` | A signal, the boolean value of which is synced with whether the overlay is visible or not. |
+| `change: EventEmitter<void>` | Emits whenever the `sortables` list is updated by the overlay component. |
+| `checkboxChange(checked: boolean, keyToUpdate: string): void` | Will update the `active` value of the `keyToUpdate`'s Sortable — from the `sortables` list — into the provided value. It is called when a checkbox's value changes. This triggers a `change` emitter event. |
+| `onDrag(currentIndex: number, previousIndex: number)` | Will update the `sortables` list's order. It is called when the list order is changed in the overlay. This triggers a `change` emitter event. |
 | `showDropdown(): void` | Shows the overlay. |
 | `hide(): void` | Hides the overlay. |

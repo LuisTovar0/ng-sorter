@@ -8,12 +8,12 @@
             </button>
             <button mat-icon-button [ngxSorterTriggerFor]="rowSorter">
                 <mat-icon>swap_vert</mat-icon>
-                <ngx-sorter #rowSorter [sortables]="sortableRows"/>
+                <ngx-sorter #rowSorter [sortables]="dataSource"/>
             </button>
         </div>
     </div>
 
-    <table mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
         <ng-container matColumnDef="position">
             <th mat-header-cell *matHeaderCellDef> No.</th>

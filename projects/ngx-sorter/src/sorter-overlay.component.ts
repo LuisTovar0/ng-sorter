@@ -2,7 +2,7 @@ import { moveItemInArray } from "@angular/cdk/drag-drop";
 import { FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayConfig, OverlayRef } from "@angular/cdk/overlay";
 import { CdkPortal } from "@angular/cdk/portal";
 import {
-  ChangeDetectionStrategy, Component, inject, Input, OnDestroy, signal, ViewChild, WritableSignal,
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewChild, WritableSignal,
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
@@ -20,41 +20,41 @@ export interface Sortable {
 })
 export class NgxSorterOverlayComponent implements OnDestroy {
 
-  #overlay = inject(Overlay);
-
   origin: FlexibleConnectedPositionStrategyOrigin | undefined;
-  @Input({ required: true }) sortables!: WritableSignal<Sortable[] | undefined>;
+  @Input({ required: true }) sortables!: Sortable[] | undefined;
+  @Output() change = new EventEmitter<void>();
   @ViewChild(CdkPortal) private contentTemplate!: CdkPortal;
 
   #overlayRef!: OverlayRef;
   #subscriptions: Subscription[] = [];
-  overlayIsOpen = signal(false);
+  overlayIsOpen = false;
+
+  constructor(
+    private overlay: Overlay,
+  ) { }
 
   // Will update the ```sortables``` list's order.
   onDrag(currentIndex: number, previousIndex: number) {
-    this.sortables.update(s => {
-      if (!s) return s;
-      const copy = [ ...s ];
-      moveItemInArray(copy, previousIndex, currentIndex);
-      return copy;
-    });
+    if (this.sortables) {
+      moveItemInArray(this.sortables, previousIndex, currentIndex);
+      this.change.emit();
+    }
   }
 
   // Will update the ```active``` value of the ```keyToUpdate```'s Sortable — from the ```sortables``` signal — into the provided value.
   checkboxChange(checked: boolean, keyToUpdate: string) {
-    this.sortables.update(s => {
-      const col = s?.find(v => v.key === keyToUpdate);
-      if (!col || !s) return s;
+    const col = this.sortables?.find(v => v.key === keyToUpdate);
+    if (col) {
       col.active = checked;
-      return [ ...s ];
-    });
+      this.change.emit();
+    }
   }
 
   showDropdown() {
     if (!this.origin)
       throw new Error("There's not an expertSorterTriggerFor directive pointing to this overlay. Please read how this component should be used at http://wiki.milenio3.local/index.php/@expert/sort-columns");
 
-    const positionStrategy = this.#overlay
+    const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(this.origin)
       .withPush(true)
@@ -63,7 +63,7 @@ export class NgxSorterOverlayComponent implements OnDestroy {
         { originX: 'end', originY: 'bottom', overlayX: 'start', overlayY: 'bottom' },
       ]);
 
-    const scrollStrategy = this.#overlay.scrollStrategies.reposition();
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
     const overlayConfig = new OverlayConfig({
       positionStrategy: positionStrategy,
       scrollStrategy: scrollStrategy,
@@ -71,17 +71,17 @@ export class NgxSorterOverlayComponent implements OnDestroy {
       backdropClass: 'cdk-overlay-transparent-backdrop',
     });
 
-    this.#overlayRef = this.#overlay.create(overlayConfig);
+    this.#overlayRef = this.overlay.create(overlayConfig);
     this.#overlayRef.attach(this.contentTemplate);
     this.#subscriptions.push(
       this.#overlayRef.backdropClick().subscribe(() => this.hide()),
     );
-    this.overlayIsOpen.set(true);
+    this.overlayIsOpen = true;
   }
 
   hide() {
     this.#overlayRef.detach();
-    this.overlayIsOpen.set(false);
+    this.overlayIsOpen = false;
   }
 
   ngOnDestroy() { this.#subscriptions.forEach(s => s.unsubscribe()); }
