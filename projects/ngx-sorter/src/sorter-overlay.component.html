@@ -1,9 +1,11 @@
 <ng-template cdkPortal>
     <div cdkDropList (cdkDropListDropped)="onDrag($event.currentIndex, $event.previousIndex)" class="drop-list">
-        <div cdkDrag *ngFor="let col of sortables()" class="drag-box">
-            <mat-icon fontIcon="drag_handle"/>
-            <mat-checkbox [checked]="col.active" (change)="checkboxChange($event.checked, col.key)"/>
-            {{ col.displayName || col.key}}
-        </div>
+        @for(col of sortables(); track col.key){
+            <div cdkDrag class="drag-box">
+                <mat-icon fontIcon="drag_handle"/>
+                <mat-checkbox [checked]="col.active" (change)="checkboxChange($event.checked, col.key)"/>
+                {{ col.displayName || col.key}}
+            </div>
+        }
     </div>
 </ng-template>
