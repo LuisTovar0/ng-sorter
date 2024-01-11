@@ -12,6 +12,7 @@ export class SorterTriggerDirective implements OnInit {
     if (this.ngxSorterTriggerFor.origin)
       throw "Only one expertSorterTriggerFor directive should point to a sorter overlay.";
     this.ngxSorterTriggerFor.origin = this.#elementRef;
+    this.ngxSorterTriggerFor.checkboxChange
     this.#elementRef.nativeElement.addEventListener('click', () => this.ngxSorterTriggerFor.showDropdown());
   }
 

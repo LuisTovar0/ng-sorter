@@ -1,10 +1,8 @@
 {
   "name": "ngx-sorter",
-  "version": "2.0.0-testing.0",
+  "version": "2.0.0",
   "peerDependencies": {
-    "@angular/material": ">=16",
-    "@types/lodash-es": "^4.17.12",
-    "lodash-es": "^4.17.21"
+    "@angular/material": ">=16"
   },
   "dependencies": {
     "tslib": "^2.3.0"
