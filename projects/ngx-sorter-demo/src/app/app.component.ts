@@ -1,9 +1,9 @@
-import {CommonModule} from '@angular/common';
-import {Component, computed, signal} from '@angular/core';
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
-import {MatTableModule} from "@angular/material/table";
-import {NgxSorterModule, Sortable} from "ngx-sorter";
+import { CommonModule } from '@angular/common';
+import { Component, computed, signal } from '@angular/core';
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { MatTableModule } from "@angular/material/table";
+import { NgxSorterModule, Sortable } from "ngx-sorter";
 
 export interface PeriodicElement {
   name: string;
@@ -28,19 +28,38 @@ const ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ CommonModule, MatTableModule, MatButtonModule, MatIconModule, NgxSorterModule ],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule, NgxSorterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
 
-  sortableColumns :Sortable[]= [
+  // The target type is string, there's the need for an object specifically for sorting. It will need mapping so it can be displayed.
+  sortableColumns: Sortable[] = [
     { key: 'position', active: true, displayName: 'Position' },
     { key: 'name', active: true, displayName: 'Name' },
     { key: 'weight', active: true, displayName: 'Weight' },
     { key: 'symbol', active: true, displayName: 'Symbol' },
   ];
+  displayedColumns!: string[];
 
-  dataSource :Sortable[]= ELEMENT_DATA.map(elem => ({ ...elem, key: elem.name, active: true }));
+  // The target type is an object, so it can be merged with the Sortable type. This way it won't need mapping in order to be displayed.
+  sortableRows = ELEMENT_DATA.map(elem => ({ ...elem, key: elem.name, active: true }))
+  dataSource!: PeriodicElement[];
+
+  constructor() {
+    this.setDisplayedColumns();
+    this.setDataSource();
+  }
+
+  setDisplayedColumns() {
+    this.displayedColumns = this.sortableColumns
+      .filter(s => s.active)
+      .map(s => s.key);
+  }
+
+  setDataSource() {
+    this.dataSource = this.sortableRows.filter(s => s.active);
+  }
 
 }

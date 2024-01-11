@@ -23,11 +23,16 @@ export class NgxSorterOverlayComponent implements OnDestroy {
   origin: FlexibleConnectedPositionStrategyOrigin | undefined;
   @Input({ required: true }) sortables!: Sortable[] | undefined;
   @Output() change = new EventEmitter<void>();
+  @Output() opened = new EventEmitter<void>();
+  @Output() hid = new EventEmitter<void>();
   @ViewChild(CdkPortal) private contentTemplate!: CdkPortal;
 
   #overlayRef!: OverlayRef;
   #subscriptions: Subscription[] = [];
-  overlayIsOpen = false;
+  #overlayIsOpen = false;
+  get overlayIsOpen() {
+    return this.#overlayIsOpen;
+  }
 
   constructor(
     private overlay: Overlay,
@@ -76,12 +81,14 @@ export class NgxSorterOverlayComponent implements OnDestroy {
     this.#subscriptions.push(
       this.#overlayRef.backdropClick().subscribe(() => this.hide()),
     );
-    this.overlayIsOpen = true;
+    this.#overlayIsOpen = true;
+    this.opened.emit();
   }
 
   hide() {
     this.#overlayRef.detach();
-    this.overlayIsOpen = false;
+    this.#overlayIsOpen = false;
+    this.hid.emit();
   }
 
   ngOnDestroy() { this.#subscriptions.forEach(s => s.unsubscribe()); }

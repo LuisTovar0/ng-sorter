@@ -1,6 +1,6 @@
 # ngx-sorter
 
-An Angular CDK overlay to sort anything.
+An Angular CDK overlay to sort anything. [Check out the newer versions](https://github.com/LuisTovar0/ngx-sorter).
 
 ![](https://raw.githubusercontent.com/LuisTovar0/ngx-sorter/main/result.gif)
 
@@ -36,6 +36,10 @@ export class MyComponent {
 <ngx-sorter #sorter [sortables]="sortables"/>
 ```
 
+Now, the overlay actions will **mutate the `sortables` list**. Your component can react to these changes by reading from the `changes` event emitter.
+
+Note: In newer versions of the library, this kind of reactivity is achieved from the use of signals, instead of an event emitter.
+
 
 ### Specifications
 
@@ -53,9 +57,11 @@ interface Sortable {
 
 | Declaration | Description |
 |:-|:-|
-| `overlayIsOpen: boolean` | A signal, the boolean value of which is synced with whether the overlay is visible or not. |
-| `change: EventEmitter<void>` | Emits whenever the `sortables` list is updated by the overlay component. |
-| `checkboxChange(checked: boolean, keyToUpdate: string): void` | Will update the `active` value of the `keyToUpdate`'s Sortable — from the `sortables` list — into the provided value. It is called when a checkbox's value changes. This triggers a `change` emitter event. |
-| `onDrag(currentIndex: number, previousIndex: number)` | Will update the `sortables` list's order. It is called when the list order is changed in the overlay. This triggers a `change` emitter event. |
+| get `overlayIsOpen: boolean` | A read-only boolean, the value of which is synced with whether the overlay is visible or not. |
+| Output `opened: EventEmitter<void>` | Emits whenever the overlay becomes open. |
+| Output `hid: EventEmitter<void>` | Emits whenever the overlay becomes hidden. |
+| Output `change: EventEmitter<void>` | Emits whenever the `sortables` list is updated by the overlay component. |
+| `checkboxChange(checked: boolean, keyToUpdate: string): void` | Toggles the `active` state of a sortable element identified by the given key (`keyToUpdate`) and emits the `change` event. |
+| `onDrag(currentIndex: number, previousIndex: number)` | Will update the `sortables` list's order and emit the `change` event. It is called when the list order is changed in the overlay. |
 | `showDropdown(): void` | Shows the overlay. |
 | `hide(): void` | Hides the overlay. |
