@@ -4,11 +4,11 @@
         <div>
             <button mat-icon-button [ngxSorterTriggerFor]="columnsSorter">
                 <mat-icon>swap_horiz</mat-icon>
-                <ngx-sorter #columnsSorter [sortables]="sortableColumns" (change)="setDisplayedColumns()"/>
+                <ngx-sorter #columnsSorter [sortables]="sortableColumns" (change)="setDisplayedColumns()"></ngx-sorter>
             </button>
             <button mat-icon-button [ngxSorterTriggerFor]="rowSorter">
                 <mat-icon>swap_vert</mat-icon>
-                <ngx-sorter #rowSorter [sortables]="sortableRows" (change)="setDataSource()"/>
+                <ngx-sorter #rowSorter [sortables]="sortableRows" (change)="setDataSource()"></ngx-sorter>
             </button>
         </div>
     </div>
