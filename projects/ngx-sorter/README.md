@@ -2,7 +2,7 @@
 
 An Angular CDK overlay to sort anything. [Check out the newer versions](https://github.com/LuisTovar0/ngx-sorter).
 
-![](https://raw.githubusercontent.com/LuisTovar0/ngx-sorter/main/result.gif)
+<img src="https://raw.githubusercontent.com/LuisTovar0/ngx-sorter/main/result.gif" style="border-radius: 6px; border: solid 1px"><!---->
 
 ## Compatibility
 
