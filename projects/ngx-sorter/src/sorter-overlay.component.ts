@@ -2,7 +2,7 @@ import { moveItemInArray } from "@angular/cdk/drag-drop";
 import { FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayConfig, OverlayRef } from "@angular/cdk/overlay";
 import { CdkPortal } from "@angular/cdk/portal";
 import {
-  ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewChild, WritableSignal,
+  ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewChild, inject
 } from "@angular/core";
 import { Subscription } from "rxjs";
 
@@ -20,8 +20,10 @@ export interface Sortable {
 })
 export class NgxSorterOverlayComponent implements OnDestroy {
 
+  private overlay = inject(Overlay);
+
   origin: FlexibleConnectedPositionStrategyOrigin | undefined;
-  @Input({ required: true }) sortables!: Sortable[] | undefined;
+  @Input() sortables!: Sortable[] | undefined;
   @Output() change = new EventEmitter<void>();
   @Output() opened = new EventEmitter<void>();
   @Output() hid = new EventEmitter<void>();
@@ -33,10 +35,6 @@ export class NgxSorterOverlayComponent implements OnDestroy {
   get overlayIsOpen() {
     return this.#overlayIsOpen;
   }
-
-  constructor(
-    private overlay: Overlay,
-  ) { }
 
   // Will update the ```sortables``` list's order.
   onDrag(currentIndex: number, previousIndex: number) {

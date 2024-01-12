@@ -1,6 +1,6 @@
 {
   "name": "ngx-sorter",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "peerDependencies": {
     "@angular/material": ">=14"
   },

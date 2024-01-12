@@ -14,6 +14,8 @@ An Angular CDK overlay to sort anything. [Check out the newer versions](https://
 
 ## Version 1 usage
 
+[Demo](https://stackblitz.com/edit/ngx-sorter-v1-demo).
+
 Make sure to install Angular Material before installing `ngx-sorter`.
 
 **In the TypeScript**, declare a list of `Sortable`.
